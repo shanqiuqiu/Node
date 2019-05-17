@@ -1,4 +1,4 @@
-＃节点个人博客
+# node个人博客
 
 # npm install 安装依赖
 
