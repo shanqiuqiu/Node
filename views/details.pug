@@ -1,0 +1,85 @@
+extends layout
+block content
+    div(id='contentiner')
+        div(class='lbox')
+            each val in data
+                div(class='list list-con')
+                    div(class='item')
+                        p(class='title') #{val.title}
+                        div(class='article-con') #{val.content}
+                        input(type='hidden' value=val.id)
+                        div(class='details')
+                            p
+                               span 作者：#{val.author}
+                               span 发表时间：
+                                    script.
+                                            document.write(time('#{val.posttime}'));
+                                            function time(timestamp){
+                                                var date = new Date(timestamp);
+                                                var Y = date.getFullYear() + '-';
+                                                var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                                                var D = date.getDate() < 10 ? '0'+date.getDate()+ ' ' : date.getDate()+ ' ';
+                                                var h = date.getHours() < 10 ? '0'+date.getHours()+ ':' : date.getHours()+ ':';
+                                                var m = date.getMinutes() < 10 ? '0'+date.getMinutes()+ ':' : date.getMinutes()+ ':';
+                                                var s = date.getSeconds()< 10 ? '0'+date.getSeconds() : date.getSeconds();
+                                                return Y+M+D+h+m+s;
+                                            }
+                               span 浏览量：#{val.hit}
+            div(class='article')
+                div(class='a-title')
+                    h3 博文详情
+                div(id='con')
+                    script.
+                        $(function(){
+                            $('#con').html($('.article-con').html());
+                        });
+                       
+        div(class='rbox')
+            div(class='recommend reco-d')
+                div(class='a-title')
+                    h3 推荐博文
+                ul(class='a-con')
+                    each val in result
+                        li
+                            a(href='/details?id='+val.id+'&hit='+val.hit) #{val.title}
+            div(class='rankings')
+                div(class='a-title')
+                    h3 点击排行
+                ul(class='a-con a-right')
+                    each val in result
+                        li
+                            span
+                            a(href='/details?id='+val.id+'&hit='+val.hit) #{val.title}
+            div(class='friend-link')
+                div(class='a-title')
+                    h3 友情链接
+                div(class='cloud')
+                        a(href='') 亲了博客
+                        a(href='') 宝宝个人博客
+                        a(href='') 参团链接
+                        a(href='') 一折
+                        a(href='') 阿里云
+                        a(href='') 今夕何夕
+                        a(href='') cms
+                        a(href='') 轻量级cms
+                        a(href='') php的cms
+                        a(href='') 内容管理系统
+                        a(href='') 开源cms推荐
+                        a(href='') 开源CMS
+                        a(href='') 个人建站空间
+                        a(href='') 空间申请
+                        a(href='') 蓝色畅想
+        div(id='footer')
+            p copyright&copy;2018 Person Blog
+            p Powered by shanqiu
+            script.
+                var $li = $('.a-right li');
+                var $span = $('.a-right span');
+                for(var i = 0;i < $li.length;i++){
+                    if((i+1) <= 3){
+                        $span[i].className = 'orgbg';
+                    }else{
+                        $span[i].className = '';
+                    }
+                    $span[i].innerHTML = i+1;
+                }

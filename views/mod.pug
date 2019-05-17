@@ -1,0 +1,51 @@
+extends admin-layout
+block content
+        div(class='backbox')
+            div(class='back-header')
+                span 个人博客管理系统
+                span 欢迎回来：#{user}
+            div(class='backl')
+                ul(class='backlist')
+                    li(class='on')
+                        a(href='/admin') 博文管理
+                    li
+                        a(href='/admin/insert') 添加博文文章
+                    li
+                        a(href='/admin/logout') 退出管理系统
+            div(class='backr')
+                ul(class='menu')
+                    li(class='border')
+                        a(href='javascript:;') 添加博文
+                    li
+                        a(href='/admin?currentPage=0' style='color:#000;') 返回博文列表
+                div(class='adminUpdate')
+                    div(class='box')
+                        div(class='det bg')
+                            span 当前操作：
+                            span 博文管理/
+                            span 修改博文
+                        div(class='update-con')
+                            form(action='/admin/update' method='post' onsubmit='return check()')
+                                ul
+                                    each val in data
+                                        li
+                                            span 博文标题：
+                                            input(type='text' class='style' onblur='inputCheck(this)' name='title' value=val.title)
+                                            em(class='message')
+                                        li
+                                            span 博文作者：
+                                            input(type='text' class='style' onblur='inputCheck(this)' name='user' value=val.author)
+                                            em(class='message')
+                                        li
+                                            span 博文内容：
+                                            textarea(name='con' onblur='inputCheck(this)' class='style') #{val.content}
+                                            em(class='message')
+                                        li
+                                            span 初始浏览量：
+                                            input(type='text' onblur='inputCheck(this)' class='style' name='browse' value=val.hit)
+                                            em(class='message')
+                                        li
+                                            input(type='submit' class='btn btn-primary btn-s' value='修改博文')
+                                            input(type='button' id='clear' class='btn btn-primary btn-s' value='清除重来')
+                                            input(type='hidden' name='id' value=val.id)
+            div(class='footer')

@@ -1,0 +1,27 @@
+doctype html
+html
+    head
+        title 登录
+        link(rel='stylesheet', href='/css/login.css')
+        link(rel="stylesheet" href="https://i.icomoon.io/public/temp/6f6084fd63/UntitledProject/style.css")
+        script(src='/js/check.js')
+        script(src='/js/jquery.js')
+        script(src='/js/login.js')
+    body
+        div(class='login-box')
+            div(class='login-title')
+                span 注册
+            div(class='formbox')
+                form(action='' method='post')
+                    p
+                        span(class="icon-user")
+                        input(type='text' onblur='blurCheck(this)' name='author' id='author' placeholder="请输入用户名")
+                    em(class='message')
+                    p
+                        span(class="icon-lock")
+                        input(type='password' onblur='blurCheck(this)' name='pwd' id='pwd' placeholder="请输入密码")
+                    em(class='message')
+                    p
+                        input(type='button' value='注册' id='btn2')
+            div(class='login-link')
+                a(href='/') 首页

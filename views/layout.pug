@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel="stylesheet" href="/font/iconfont.css")
+    script(src='js/jquery.js')
+    script(src='js/animite.js')
+  body
+    div(id='header')
+      span(class='blog-title') 山丘的个人博客
+      div(class='nav')
+          ul(class='list')
+              li
+                  a(href='/') 首页
+              li
+                  a(href='/login') 撰写文章
+              li
+                  a(href='javascript:;') 友情链接
+              li
+                  a(href='javascript:;') 联系博主
+    block content

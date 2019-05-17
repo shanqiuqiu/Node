@@ -1,0 +1,131 @@
+extends layout
+block content
+    div(class='layui-layer-shade')
+    div(class='wraper')
+        div(class='left')
+            ul
+                li
+                    a(href='/admin') 
+                        i(class='iconfont icon-huanyingye')
+                        span 欢迎页面
+                        i(class='iconfont icon-zuojiantou fixed')
+                li
+                    a(href='javascript:;')
+                        i(class='iconfont icon-geren')
+                        span 会员管理
+                        i(class='iconfont icon-zuojiantou fixed')
+                    ul(class='m-list')
+                        li(class='m-con')
+                            a(href='/admin/adminList' class='link')
+                                i(class='iconfont icon-youjiantou')
+                                span 会员列表
+                        li(class='m-con')
+                            a(href='/admin/adminDel' class='link current')
+                                i(class='iconfont icon-youjiantou')
+                                span 会员删除
+                        li(class='m-con')
+                            a(href='javascript:;' class='link') 
+                                i(class='iconfont icon-youjiantou')
+                                span 等级管理
+                        li(class='m-con')
+                            a(href='javascript:;' class='link') 
+                                i(class='iconfont icon-youjiantou')
+                                span 积分管理
+                        li(class='m-con')
+                            a(href='javascript:;' class='link') 
+                                i(class='iconfont icon-youjiantou')
+                                span 浏览记录
+                li
+                    a(href='javascript:;')
+                        i(class='iconfont icon-wenhao')
+                        span 分类管理
+                        i(class='iconfont icon-zuojiantou fixed')
+                li
+                    a(href='javascript:;')
+                        i(class='iconfont icon-wenhao')
+                        span 轮播管理
+                        i(class='iconfont icon-zuojiantou fixed')
+                li
+                    a(href='javascript:;')
+                        i(class='iconfont icon-wenhao')
+                        span 管理员管理
+                        i(class='iconfont icon-zuojiantou fixed')
+                li
+                    a(href='javascript:;')
+                        i(class='iconfont icon-wenhao')
+                        span 系统统计
+                        i(class='iconfont icon-zuojiantou fixed')
+                li
+                    a(href='javascript:;')
+                        i(class='iconfont icon-wenhao')
+                        span 系统设置
+                        i(class='iconfont icon-zuojiantou fixed')
+        div(class='right')
+            div(class='r-top')
+                div(class='seach')
+                    label 日期范围
+                    div(class='date')    
+                        input(type='text' id='nowdate' name='nowdate' placeholder='开始日')
+                    div(class='newDate')
+                        input(type='text' id='newdate' name='newdate' placeholder='截止日')
+                    div(class='user')
+                        input(type='text' name='user' placeholder='请输入用户名')
+                    button(class='btn')
+                        i(class='iconfont icon-sousuofangdajing-')
+            div(class='numbar')
+                button(class='del')
+                    i(class='iconfont icon-shanchu')
+                    span 批量删除                                                                                                                                 
+                p 共有数据：
+                    span #{dataLen}条
+            table(class='layui-table')
+                tr
+                    th
+                        input(type="checkbox" name='id')
+                    th ID
+                    th 用户名
+                    th 性别
+                    th 手机
+                    th 邮箱
+                    th 地址
+                    th 加入时间
+                    th 状态
+                    th 操作
+                each val in data
+                    tr
+                        td 
+                            input(type="checkbox" class='checkbox' name='index'+val.id value=val.id)
+                        td #{val.id}
+                        td #{val.author}
+                        td #{val.sex}
+                        td #{val.phone}
+                        td #{val.mail}
+                        td #{val.address}
+                        td #{val.addtime}
+                        script.
+                            if(#{val.status} == 0){
+                                document.write('<td><span class="recovery">已删除</span></td>');
+                            }
+                        td 
+                            a(href='javascript:;' title='编辑' class='update' fid=val.id)
+                                i(class='iconfont icon-pen')
+                            //删除弹框
+                            div(class='delBox')
+                                div(class='delmsg')
+                                    div(class='u-top')
+                                        span 信息
+                                        a(href='javascript:;' class='close')
+                                            i(class='iconfont icon-chahao')
+                                    div(class='msg')
+                                        p 确认要删除吗？
+                                        div(class='delbtn')
+                                            a(href='/admin/del?id='+val.id class='ok') 确认
+                                            a(href='javascript:;' class='no') 取消
+                            a(href='javascript:;' title='删除' class='del')
+                                i(class='iconfont icon-shanchu')
+        script.
+            $(function(){
+                $('.left > ul > li > a').click();
+                laydate({elem : '#nowdate'});
+                laydate({elem : '#newdate'});
+            })

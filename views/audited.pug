@@ -1,0 +1,67 @@
+extends admin-layout
+block content
+        div(class='backbox')
+            div(class='back-header')
+                span 个人博客管理系统
+                span 欢迎回来：#{user}
+            div(class='backl')
+                ul(class='backlist')
+                    li(class='on')
+                        a(href='/admin') 博文管理
+                    li
+                        a(href='/admin/insert') 添加博文文章
+                    li
+                        a(href='/admin/logout') 退出管理系统
+            div(class='backr')
+                ul(class='menu')
+                    li
+                        a(href='/admin') 显示全部
+                    li(class='border')
+                        a(href='/admin/audited') 已审核
+                    li
+                        a(href='/admin/unaudited') 未审核
+                ul(class='tablebox')
+                    li(class='table-responsive space show')
+                        table(class='table')
+                            tr(class='bg')
+                                th
+                                    input(type='checkbox' name='option')
+                                th 博文标题
+                                th 博文状态
+                                th 发表时间
+                                th 浏览量
+                                th 管理操作
+                            each val in data
+                                tr
+                                    td(class='pdd')
+                                        input(type='checkbox' name='option')
+                                    td #{val.title}
+                                    -if(val.status==0){
+                                        td(class='color status' id=val.id sid=val.status style='color:#28df56;') 已审核
+                                    -}else{
+                                        td(class='color status' id=val.id sid=val.status style='color:#f00;') 未审核
+                                    -}
+                                    td
+                                        script.
+                                            document.write(time('#{val.posttime}'));
+                                            function time(timestamp){
+                                                var date = new Date(timestamp);
+                                                var Y = date.getFullYear() + '-';
+                                                var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                                                var D = date.getDate() < 10 ? '0'+date.getDate()+ ' ' : date.getDate()+ ' ';
+                                                var h = date.getHours() < 10 ? '0'+date.getHours()+ ':' : date.getHours()+ ':';
+                                                var m = date.getMinutes() < 10 ? '0'+date.getMinutes()+ ':' : date.getMinutes()+ ':';
+                                                var s = date.getSeconds()< 10 ? '0'+date.getSeconds() : date.getSeconds();
+                                                return Y + M + D + h + m + s;
+                                            }
+                                    td #{val.hit}
+                                    td(class='id')
+                                        a(href='/admin/mod?id='+val.id class='btn btn-primary') Mod
+                                        a(href='/admin/del?id='+val.id class='btn btn-primary') Del
+                            tr(align='center')
+                                td(colspan='6')
+                                    a(href='/admin/audited?list=0' class='btn btn-primary') 首页
+                                    a(href=`/admin/audited?list=${list - 1}` class='btn btn-primary') 上一页
+                                    a(href=`/admin/audited?list=${list + 1}` class='btn btn-primary') 下一页
+                                    a(href='' class='btn btn-primary') 尾页
+            div(class='footer')

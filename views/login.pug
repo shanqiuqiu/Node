@@ -1,0 +1,28 @@
+doctype html
+html
+    head
+        title 登录
+        link(rel='stylesheet', href='/css/login.css')
+        link(rel="stylesheet" href="/font/iconfont.css")
+        script(src='js/check.js')
+        script(src='js/jquery.js')
+        script(src='js/login.js')
+    body
+        div(class='login-box')
+            div(class='login-title')
+                span 请先登录
+            div(class='formbox')
+                form(action='' method='post')
+                    p
+                        span(class="iconfont icon-yonghu")
+                        input(type='text' onblur='blurCheck(this)' name='user' id='user' placeholder="请输入用户名")
+                    em(class='message')
+                    p
+                        span(class="iconfont icon-icon-mima")
+                        input(type='password' onblur='blurCheck(this)' name='password' id='password' placeholder="请输入密码")
+                    em(class='message')
+                    p
+                        input(type='button' value='登录' id='btn')
+            div(class='login-link')
+                a(href='/login/register') 注册
+                a(href='/') 首页

@@ -1,0 +1,101 @@
+extends layout
+block content
+    div(id='contentiner')
+        div(class='lbox')
+            div(class='showbox')
+                ul(class='list show')
+                    li
+                        a(href='javascript:;')
+                            img(src='images/1.jpg')
+                    li
+                        a(href='javascript:;')
+                            img(src='images/2.jpg')
+                div(class='tablist')
+                    span(class='on')
+                    span
+                div(class='btnbox')
+                    span(class='left') &lt;
+                    span(class='right') &gt;
+            div(class='headline')
+                ul(class='list ban')
+                    li
+                        a(href='')
+                            img(src='images/3.jpg')
+                            span 个人网站做好了，百度不收录怎么办？来，看看他们怎么做的。
+                    li
+                        a(href='')
+                            img(src='images/4.jpg')
+                            span 【匆匆那些年】总结个人博客经历的这四年…
+            div(class='article')
+                div(class='a-title')
+                    h3 最新博文
+                each val in data
+                    div(class='list')
+                        div(class='item')
+                            p(class='title') #{val.title}
+                            div(class='article-con') #{val.content}
+                            div(class='details')
+                                p
+                                   span 作者：#{val.author}
+                                   span 发表时间：
+                                        script.
+                                            document.write(time('#{val.posttime}'));
+                                            function time(timestamp){
+                                                var date = new Date(timestamp);
+                                                var Y = date.getFullYear() + '-';
+                                                var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                                                var D = date.getDate() < 10 ? '0'+date.getDate()+ ' ' : date.getDate()+ ' ';
+                                                var h = date.getHours() < 10 ? '0'+date.getHours()+ ':' : date.getHours()+ ':';
+                                                var m = date.getMinutes() < 10 ? '0'+date.getMinutes()+ ':' : date.getMinutes()+ ':';
+                                                var s = date.getSeconds()< 10 ? '0'+date.getSeconds() : date.getSeconds();
+                                                return Y + M + D + h + m + s;
+                                            } 
+                                   span 浏览量：#{val.hit}
+                                div(class='link')
+                                    a(href='/details?id='+val.id+'&hit='+val.hit class='more') 阅读更多
+        div(class='rbox')
+            div(class='bcad')
+                div(class='mycad') 我的名片
+                div(class='cad-con')
+                    ul(class='cad')
+                        li 网名：山丘
+                        li 职业：Web前端工程师
+                        li 现居：河北省定州市
+                        li Email：dm_sq@qq.com
+                div(class='links')
+                    a(href='/' title='首页' class='iconfont icon-shouye')
+                    a(href='/email' title='邮箱' class='iconfont icon-youxiang')
+                    a(href='/qq' title='qq' class='iconfont icon-qq')
+                    a(href='/wechat' title='微信' class='iconfont icon-tubiaozhizuo-')
+                        div(class='wechat-pic')
+                            img(src='images/wechat_bg.jpg')
+            div(class='recommend')
+                div(class='a-title')
+                    h3 推荐博文
+                ul(class='a-con')
+                    each val in result
+                        li
+                            a(href='/details?id='+val.id+'&hit='+val.hit) #{val.title}
+            div(class='rankings')
+                div(class='a-title')
+                    h3 点击排行
+                ul(class='a-con a-right')
+                    each val in result
+                        li
+                            span
+                            a(href='/details?id='+val.id+'&hit='+val.hit) #{val.title}
+
+        div(id='footer')
+            p copyright&copy;2018 Person Blog
+            p Powered by shanqiu
+            script.
+                var $li = $('.a-right li');
+                var $span = $('.a-right span');
+                for(var i = 0;i < $li.length;i++){
+                    if((i+1) <= 3){
+                        $span[i].className = 'orgbg';
+                    }else{
+                        $span[i].className = '';
+                    }
+                    $span[i].innerHTML = i+1;
+                }
